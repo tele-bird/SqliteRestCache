@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BethanysPieShop.Mobile.Views.Shared.CardView">
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup Name="CommonStates">
+            <VisualState Name="Normal">
+                <VisualState.Setters>
+                    <Setter Property="BackgroundColor" Value="{StaticResource White}"></Setter>
+                </VisualState.Setters>
+            </VisualState>
+            <VisualState Name="Selected">
+                <VisualState.Setters>
+                    <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"></Setter>
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+
+    <Grid RowDefinitions="Auto,Auto,Auto"
+          Padding="10"
+          WidthRequest="200">
+        <Frame Grid.Row="0"
+               HeightRequest="175"
+               WidthRequest="175"
+               CornerRadius="20"
+               IsClippedToBounds="True"
+               Padding="0"
+               BorderColor="Transparent"
+               Margin="0">
+            <Image x:Name="ImageUrl"
+                   Aspect="AspectFill"
+                   HeightRequest="175"
+                   WidthRequest="175" />
+        </Frame>
+        <Label Grid.Row="1"
+               x:Name="Name"
+               FontSize="18"
+               VerticalOptions="Center" />
+        <Label Grid.Row="2"
+               x:Name="Price"
+               TextColor="{StaticResource Primary}"
+               FontSize="16"
+               FontAttributes="Bold"
+               VerticalOptions="End" />
+    </Grid>
+</ContentView>

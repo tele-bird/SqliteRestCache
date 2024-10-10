@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<base:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:base="using:BethanysPieShop.Mobile.Views.Base"
+             x:Class="BethanysPieShop.Mobile.Views.MyAccountPage">
+    
+    <ScrollView>
+        <Grid>
+            <Grid RowDefinitions="Auto, *">
+                <Image Grid.Row="0"
+                       Source="home"
+                       Aspect="AspectFill"
+                       HeightRequest="200"
+                       Margin="0,-45,0,0" />
+
+                <Frame Grid.Row="1"
+                       CornerRadius="31"
+                       TranslationY="-23"
+                       BorderColor="Transparent"
+                       BackgroundColor="{StaticResource White}"
+                       VerticalOptions="FillAndExpand">
+                    <Grid RowDefinitions="Auto, Auto, Auto"
+                          Padding="20"
+                          RowSpacing="5">
+                        <Label Grid.Row="0"
+                               Style="{StaticResource Headline}"
+                               HorizontalTextAlignment="Center"
+                               FontSize="24"
+                               Text="Welcome" />
+                        <Label Grid.Row="1"
+                               Style="{StaticResource SubHeadline}"
+                               HorizontalTextAlignment="Center"
+                               FontSize="20"
+                               Text="{Binding Email}" />
+                        <StackLayout Grid.Row="2" Margin="0,30,0,0">
+                            <Button
+                                Margin="5"
+                                IsEnabled="{Binding IsLoggedIn}"
+                                Command="{Binding GoToOrderHistoryCommand}"
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                Text="Order History"
+                                WidthRequest="250"/>
+            
+                            <Button
+                                Margin="5"
+                                IsVisible="{Binding IsLoggedIn}"
+                                Command="{Binding LogoutCommand}"
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                Text="Logout"
+                                WidthRequest="250" />
+            
+                            <Button
+                                Margin="5"
+                                IsVisible="{Binding IsLoggedOut}"
+                                Command="{Binding LoginCommand}"
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                Text="Login"
+                                WidthRequest="250"/>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+            </Grid>
+            <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}"
+                  IsVisible="{Binding IsLoading}">
+                <ActivityIndicator IsRunning="{Binding IsLoading}" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+    
+</base:ContentPageBase>

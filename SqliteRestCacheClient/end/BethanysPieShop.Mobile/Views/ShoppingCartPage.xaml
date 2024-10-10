@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<base:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:base="clr-namespace:BethanysPieShop.Mobile.Views.Base"
+                      x:Class="BethanysPieShop.Mobile.Views.ShoppingCartPage"
+                      x:Name="CartPage">
+    
+    <ScrollView>
+        <Grid>
+            <Grid IsVisible="{Binding IsLoaded}">
+                <Grid IsVisible="{Binding HasItemsInCart}"
+                      RowDefinitions="Auto,Auto">
+                    <CollectionView Grid.Row="0"
+                                    Margin="0,12"
+                                    ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                Orientation="Vertical"
+                                Span="1"
+                                VerticalItemSpacing="12" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem
+                                                BackgroundColor="#FF3D00"
+                                                Command="{Binding Source={x:Reference CartPage}, Path=BindingContext.DeleteCommand}"
+                                                CommandParameter="{Binding .}"
+                                                Text="Delete" />
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <StackLayout Orientation="Horizontal" Spacing="16" Margin="12">
+                                        <Frame Grid.Row="0"
+                                               HeightRequest="100"
+                                               WidthRequest="80"
+                                               CornerRadius="20"
+                                               IsClippedToBounds="True"
+                                               Padding="0"
+                                               BorderColor="Transparent"
+                                               Margin="0">
+                                            <Image Source="{Binding ImageThumbnailUrl}"
+                                                   Aspect="AspectFill"
+                                                   HeightRequest="100"
+                                                   WidthRequest="80" />
+                                        </Frame>
+                                        <StackLayout Spacing="6">
+                                            <Label Style="{StaticResource Headline}"
+                                                   FontSize="16"
+                                                   HorizontalOptions="Start"
+                                                   Text="{Binding Name}" />
+                                            <Grid ColumnDefinitions="1*, 1*"
+                                                  HorizontalOptions="Fill"
+                                                  VerticalOptions="Start">
+                                                <Label Grid.Column="0"
+                                                       FontAttributes="Bold"
+                                                       FontSize="16"
+                                                       HorizontalOptions="Start"
+                                                       Text="{Binding Quantity, StringFormat='Quantity: {0}'}"
+                                                       TextColor="Black" />
+                                                <Label Grid.Column="1"
+                                                       FontSize="16"
+                                                       HorizontalOptions="Start"
+                                                       Text="{Binding TotalPrice, StringFormat='{0:C}'}"
+                                                       TextColor="{StaticResource Primary}" />
+                                            </Grid>
+                                            <Stepper
+                                                HorizontalOptions="Start"
+                                                Increment="1"
+                                                Maximum="10"
+                                                Minimum="0"
+                                                Value="{Binding Quantity, Mode=TwoWay}" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Button Grid.Row="1"
+                            Margin="12"
+                            Text="Order now"
+                            Command="{Binding GoToCheckoutCommand}" />
+                </Grid>
+                <Grid IsVisible="{Binding HasNoItemsInCart}"
+                      RowDefinitions="Auto,Auto,Auto"
+                      RowSpacing="5">
+                    <Label Grid.Row="0"
+                           Margin="0,200,0,0"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           Text="Your shoppingcart is empty!" />
+                    <Label Grid.Row="1"
+                           Margin="5"
+                           FontFamily="MaterialIcon"
+                           FontSize="125"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           VerticalOptions="Center"
+                           TextColor="{StaticResource Gray500}"
+                           Text="&#xE8CC;"
+                           WidthRequest="200" />
+                    <Label Grid.Row="2"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Start"
+                           Text="Browse our catalog of delicious pies!" />
+                </Grid>
+            </Grid>
+            <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}"
+                  IsVisible="{Binding IsLoading}">
+                <ActivityIndicator IsRunning="{Binding IsLoading}" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+    
+</base:ContentPageBase>

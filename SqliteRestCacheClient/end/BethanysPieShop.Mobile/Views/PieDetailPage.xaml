@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<base:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:base="clr-namespace:BethanysPieShop.Mobile.Views.Base"
+                      x:Class="BethanysPieShop.Mobile.Views.PieDetailPage"
+                      Shell.NavBarIsVisible="True">
+    
+    <ScrollView>
+        <Grid>
+            <Grid RowDefinitions="Auto,*">
+                <Image Grid.Row="0"
+                       Source="{Binding ImageUrl}"
+                       Aspect="AspectFill"
+                       Margin="0,-45,0,0"
+                       HeightRequest="200" />
+                <Frame Grid.Row="1"
+                       CornerRadius="31"
+                       TranslationY="-23"
+                       BorderColor="Transparent"
+                       BackgroundColor="{StaticResource White}"
+                       VerticalOptions="FillAndExpand">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                          Padding="20"
+                          RowSpacing="5">
+                        <Label Grid.Row="0"
+                               Style="{StaticResource Headline}"
+                               Text="{Binding Name}" />
+
+                        <Grid Grid.Row="1"
+                              ColumnDefinitions="1*, 1*"
+                              HorizontalOptions="Fill"
+                              VerticalOptions="Start">
+                            <Label Grid.Column="0"
+                                   HorizontalOptions="Start"
+                                   Style="{StaticResource SubHeadline}" 
+                                   VerticalTextAlignment="Center"
+                                   Text="{Binding Price, StringFormat='{0:C}'}" />
+
+                            <Button Grid.Column="1" 
+                                    Margin="5"
+                                    Command="{Binding AddToCartCommand}"
+                                    FontFamily="MaterialIcon"
+                                    FontSize="20"
+                                    HorizontalOptions="End"
+                                    Text="&#xE8CC;"
+                                    WidthRequest="100" />
+                        </Grid>
+
+                        <Label Grid.Row="2"
+                            FontAttributes="Bold"
+                            FontSize="22"
+                            HorizontalOptions="StartAndExpand"
+                            Text="{Binding ShortDescription}"
+                            TextColor="Black"
+                            VerticalTextAlignment="Center" />
+
+                        <Label Grid.Row="3"
+                            FontSize="14"
+                            HorizontalOptions="StartAndExpand"
+                            Text="{Binding LongDescription}"
+                            TextColor="Black"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </Frame>
+            </Grid>
+            <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}"
+                  IsVisible="{Binding IsLoading}">
+                <ActivityIndicator IsRunning="{Binding IsLoading}" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+    
+</base:ContentPageBase>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Shell
+    x:Class="BethanysPieShop.Mobile.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.ForegroundColor="{StaticResource Primary}"
+    xmlns:views="clr-namespace:BethanysPieShop.Mobile.Views"
+    xmlns:sharedViews="using:BethanysPieShop.Mobile.Views.Shared"
+    Shell.FlyoutBehavior="Disabled">
+
+    <Shell.TitleView>
+        <sharedViews:LogoView />
+    </Shell.TitleView>
+    
+    <TabBar>
+        <Tab Title="Home" Route="Home">
+            <Tab.Icon>
+                <FontImageSource FontFamily="MaterialIcon" Glyph="&#xEA44;" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" />
+        </Tab>
+        <Tab Title="Pies" Route="PiesOverview">
+            <Tab.Icon>
+                <FontImageSource FontFamily="MaterialIcon" Glyph="&#xE7E9;" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate views:PiesOverviewPage}" />
+        </Tab>
+        <Tab Title="Cart">
+            <Tab.Icon>
+                <FontImageSource FontFamily="MaterialIcon" Glyph="&#xE8CC;" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate views:ShoppingCartPage}" />
+        </Tab>
+        <Tab Title="My account" Route="MyAccount">
+            <Tab.Icon>
+                <FontImageSource FontFamily="MaterialIcon" Glyph="&#xE7FD;" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate views:MyAccountPage}" />
+        </Tab>
+    </TabBar>
+
+    <ShellItem Route="Login">
+        <ShellContent ContentTemplate="{DataTemplate views:LoginPage}"/>
+    </ShellItem>
+    <ShellItem Route="Register">
+        <ShellContent ContentTemplate="{DataTemplate views:RegisterPage}"/>
+    </ShellItem>
+
+</Shell>

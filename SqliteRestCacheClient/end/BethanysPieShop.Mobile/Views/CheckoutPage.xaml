@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<base:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:annotations="clr-namespace:System.ComponentModel.DataAnnotations;assembly=System.ComponentModel.DataAnnotations"
+                      xmlns:base="clr-namespace:BethanysPieShop.Mobile.Views.Base"
+                      x:Class="BethanysPieShop.Mobile.Views.CheckOutPage">
+
+     <ScrollView>
+        <Grid>
+            <Grid RowDefinitions="*" IsVisible="{Binding IsLoaded}">
+                <VerticalStackLayout Padding="10">
+                    <Label
+                        Text="You're just one step away from your delicious pies."
+                        Style="{StaticResource Headline}" />
+
+                    <!--  Row 1 FirstName  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="FirstName" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding FirstName, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <!--  Row 2 LastName  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="LastName" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding LastName, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <!--  Row 3 Address Line 1  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="Address" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding AddressLine1, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <!--  Row 5 Date  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="City" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding City, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <!--  Row 6 State  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="State" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding State, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <!--  Row 7 ZipCode  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="Zip code" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding ZipCode, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <!--  Row 8 Country  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="Country" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding Country, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <!--  Row 9 Email  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="Email" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding Email, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <!--  Row 10 Phone Number  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="Phone number" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding PhoneNumber, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <Label
+                        Text="Your payment details"
+                        Style="{StaticResource Headline}" />
+
+
+                    <!--  Row 1 CardName  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="Card name" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding CardName, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <!--  Row 2 CardNumber  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="Card number" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding CardNumber, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <!--  Row 3 Card Expiration  -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="Card expiration" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding CardExpiration, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+
+                    <!-- Row 4 Cvv Code -->
+                    <StackLayout Margin="0,12">
+                        <Label FontSize="16"
+                               FontAttributes="Bold"
+                               Text="Cvv code" />
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+                            <Entry Text="{Binding CvvCode, Mode=TwoWay}"
+                                   BackgroundColor="{StaticResource Secondary}"
+                                   HeightRequest="50" />
+                        </Border>
+                    </StackLayout>
+                    <VerticalStackLayout Margin="0,10,0,0" BindableLayout.ItemsSource="{Binding Errors}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="annotations:ValidationResult">
+                                <Label
+                                    Text="{Binding ErrorMessage}"
+                                    Style="{StaticResource ErrorLabelStyle}" />
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+
+                    <Button Margin="0,10,0,25" Command="{Binding SubmitCommand}" Text="Submit" />
+                </VerticalStackLayout>
+            </Grid>
+            <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}"
+                  IsVisible="{Binding IsLoading}">
+                <ActivityIndicator IsRunning="{Binding IsLoading}" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+    
+</base:ContentPageBase>

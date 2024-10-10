@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<base:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:base="clr-namespace:BethanysPieShop.Mobile.Views.Base"
+                      x:Class="BethanysPieShop.Mobile.Views.OrderDetailPage">
+
+    <ScrollView>
+        <Grid>
+            <Grid RowDefinitions="Auto, *">
+                <Image Grid.Row="0"
+                       Source="home"
+                       Aspect="AspectFill"
+                       HeightRequest="200"
+                       Margin="0,-45,0,0" />
+
+                <Frame Grid.Row="1"
+                       CornerRadius="31"
+                       TranslationY="-23"
+                       BorderColor="Transparent"
+                       BackgroundColor="{StaticResource White}"
+                       VerticalOptions="FillAndExpand">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                          Padding="20"
+                          RowSpacing="5">
+                        <Label Grid.Row="0"
+                               Style="{StaticResource Headline}"
+                               FontSize="24"
+                               Text="{Binding Id , StringFormat='Order {0}'}" />
+                        <Label Grid.Row="1"
+                               Style="{StaticResource SubHeadline}"
+                               FontSize="16"
+                               Text="{Binding OrderDate , StringFormat='{0:D}'}" />
+
+                        <Label Grid.Row="2"
+                               Margin="0,10,0,0"
+                               Style="{StaticResource SubHeadline}"
+                               FontSize="14"
+                               Text="Delivery addres" />
+                        <Label Grid.Row="3"
+                               FontSize="12"
+                               HorizontalTextAlignment="Center"
+                               Text="{Binding DeliveryAddress}" />
+
+                        <Label Grid.Row="4"
+                               Margin="0,20,0,0"
+                               Style="{StaticResource SubHeadline}"
+                               FontSize="16"
+                               Text="Your order" />
+                        <Label Grid.Row="5"
+                               Style="{StaticResource Headline}"
+                               FontSize="16"
+                               Text="{Binding OrderTotal, StringFormat='Order total: {0:C}'}" />
+
+                        <CollectionView Grid.Row="6"
+                                        Margin="0,10,0,0"
+                                        ItemsSource="{Binding OrderLines}"
+                                        SelectionMode="None"
+                                        VerticalOptions="Start">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="12"
+                                                   Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <StackLayout>
+                                            <StackLayout Orientation="Horizontal" Spacing="16" Margin="12">
+                                                <Frame Grid.Row="0"
+                                                       HeightRequest="100"
+                                                       WidthRequest="80"
+                                                       CornerRadius="20"
+                                                       IsClippedToBounds="True"
+                                                       Padding="0"
+                                                       BorderColor="Transparent"
+                                                       Margin="0">
+                                                    <Image Source="{Binding Pie.ImageThumbnailUrl}"
+                                                           Aspect="AspectFill"
+                                                           HeightRequest="100"
+                                                           WidthRequest="80" />
+                                                </Frame>
+                                                <StackLayout Spacing="6"
+                                                             VerticalOptions="Center">
+                                                    <Label FontSize="14"
+                                                           HorizontalOptions="Start"
+                                                           Text="{Binding Pie.Name}" />
+                                                    <Label
+                                                        FontSize="14"
+                                                        HorizontalOptions="Start"
+                                                        Text="{Binding Quantity, StringFormat='Quantity: {0}'}"
+                                                        TextColor="Black" />
+                                                    <Label FontSize="14"
+                                                           HorizontalOptions="Start"
+                                                           Text="{Binding TotalPrice, StringFormat='{0:C}'}"
+                                                           TextColor="{StaticResource Primary}" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <Button
+                            Grid.Row="7"
+                            Margin="5"
+                            Command="{Binding DownloadOrderDetailCommand}"
+                            FontSize="16"
+                            HorizontalOptions="Center"
+                            Text="Download order"
+                            WidthRequest="250" />
+                       
+                        <Button
+                             Grid.Row="8"
+                             Margin="5"
+                             IsVisible="{Binding HideTrackingInformation}"
+                             IsEnabled="{Binding HideTrackingInformation}"
+                             Command="{Binding ToggleTrackingInformationCommand}"
+                             FontSize="16"
+                             HorizontalOptions="Center"
+                             Text="Track your order"
+                             WidthRequest="250" />
+                        <Button
+                             Grid.Row="8"
+                             Margin="5"
+                             IsVisible="{Binding ShowTrackingInformation}"
+                             IsEnabled="{Binding ShowTrackingInformation}"
+                             Command="{Binding ToggleTrackingInformationCommand}"
+                             FontSize="16"
+                             HorizontalOptions="Center"
+                             Text="Hide tracking information"
+                             WidthRequest="250" />
+                        <StackLayout Grid.Row="9"
+                                     IsVisible="{Binding ShowTrackingInformation}">
+                            <Label Text="Tracking information" />
+                            <CollectionView Grid.Row="5"
+                                 Margin="0"
+                                 ItemsSource="{Binding TrackingInformation}"
+                                 SelectionMode="None"
+                                 VerticalOptions="Start">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="12"
+                                Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <StackLayout>
+                                                <StackLayout Orientation="Vertical" Spacing="16" Margin="12">
+                                                    <Label Grid.Column="0"
+                                                        FontSize="14"
+                                                        HorizontalOptions="Start"
+                                                        Text="{Binding ActionDate, StringFormat='{0:d}'}"
+                                                        TextColor="Black" />
+                                                    <Label Grid.Column="1"
+                                                           FontSize="14"
+                                                           HorizontalOptions="Start"
+                                                           Text="{Binding ActionName}"
+                                                           TextColor="{StaticResource Primary}" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+            </Grid>
+            <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}"
+                  IsVisible="{Binding IsLoading}">
+                <ActivityIndicator IsRunning="{Binding IsLoading}" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+
+</base:ContentPageBase>

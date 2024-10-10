@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<base:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:base="using:BethanysPieShop.Mobile.Views.Base"
+                      x:Class="BethanysPieShop.Mobile.Views.OrderHistoryPage">
+
+    <ScrollView>
+        <Grid>
+            <Grid RowDefinitions="Auto, *">
+                <Image Grid.Row="0"
+                       Source="home"
+                       Aspect="AspectFill"
+                       HeightRequest="200"
+                       Margin="0,-45,0,0" />
+
+                <Frame Grid.Row="1"
+                       CornerRadius="31"
+                       TranslationY="-23"
+                       BorderColor="Transparent"
+                       BackgroundColor="{StaticResource White}"
+                       VerticalOptions="FillAndExpand">
+                    <Grid RowDefinitions="Auto, Auto"
+                          Padding="20"
+                          RowSpacing="5">
+                        <Label Grid.Row="0"
+                               Style="{StaticResource Headline}"
+                               FontSize="24"
+                               Text="Your order history" />
+                        <CollectionView Grid.Row="2"
+                                        Margin="0"
+                                        ItemsSource="{Binding Orders}"
+                                        SelectedItem="{Binding SelectedOrder, Mode=TwoWay}"
+                                        SelectionChangedCommand="{Binding NavigateToSelectedOrderDetailCommand}"
+                                        SelectionMode="Single"
+                                        VerticalOptions="Start">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="12"
+                                                   Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="{StaticResource White}">
+                                                        </Setter>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="{StaticResource Secondary}">
+                                                        </Setter>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Border Stroke="{StaticResource Secondary}"
+                                                StrokeThickness="4"
+                                                StrokeShape="RoundRectangle 40,0,0,40"
+                                                Background="{StaticResource White}"
+                                                Padding="16,8"
+                                                WidthRequest="250"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                            <StackLayout>
+                                                <Label Text="{Binding Id, StringFormat='Order id: {0}'}" />
+                                                <Label Text="{Binding OrderDate, StringFormat='Order date: {0:d}'}" />
+                                                <Label Text="{Binding OrderTotal, StringFormat='Order total: {0:C}'}" />
+                                            </StackLayout>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Frame>
+            </Grid>
+            <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}"
+                  IsVisible="{Binding IsLoading}">
+                <ActivityIndicator IsRunning="{Binding IsLoading}" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+
+</base:ContentPageBase> 

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<base:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:base="clr-namespace:BethanysPieShop.Mobile.Views.Base"
+                     x:Class="BethanysPieShop.Mobile.Views.RegisterPage"
+                     Shell.NavBarIsVisible="False">
+    
+     <Grid RowDefinitions="Auto,*">
+        <Image Grid.Row="0" 
+               Source="home" 
+               Aspect="AspectFill" 
+               HeightRequest="250" 
+               Margin="0,-45,0,0"/>
+
+        <Frame Grid.Row="1" 
+               CornerRadius="31" 
+               TranslationY="-23" 
+               BorderColor="Transparent" 
+               VerticalOptions="FillAndExpand">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" 
+                  Padding="20" 
+                  RowSpacing="5">
+                <Image
+                    Grid.Row="0"
+                    HeightRequest="50"
+                    HorizontalOptions="Center"
+                    Source="bethanyspieshoplogohoriz.png"
+                    VerticalOptions="Center" />
+                <Label Grid.Row="1" 
+                       Text="Sign up" 
+                       Style="{StaticResource Headline}" />
+                <!-- Email Information-->
+                <Label Grid.Row="2" 
+                       Text="Email" 
+                       FontSize="16" 
+                       FontAttributes="Bold"/>
+                <Border Grid.Row="3" StrokeShape="RoundRectangle 20,20,20,20">
+                    <Entry 
+                        Text="{Binding Email, Mode=TwoWay}"
+                        BackgroundColor="{StaticResource Secondary}" 
+                        HeightRequest="50"/>
+                </Border>
+                <!-- Password Information-->
+                <Label Grid.Row="4" Text="Password" FontSize="16" FontAttributes="Bold"/>
+                <Border Grid.Row="5" StrokeShape="RoundRectangle 20,20,20,20">
+                    <Entry 
+                        Text="{Binding Password, Mode=TwoWay}"
+                        BackgroundColor="{StaticResource Secondary}"
+                        IsPassword="True" 
+                        HeightRequest="50"/>
+                </Border>
+
+                <!-- Password Information-->
+                <Label Grid.Row="6" Text="Confirm password" FontSize="16" FontAttributes="Bold"/>
+                <Border Grid.Row="7" StrokeShape="RoundRectangle 20,20,20,20">
+                    <Entry 
+                        Text="{Binding ConfirmPassword, Mode=TwoWay}"
+                        BackgroundColor="{StaticResource Secondary}" 
+                        IsPassword="True" 
+                        HeightRequest="50"/>
+                </Border>
+
+                <Button Grid.Row="8" 
+                        Text="Continue" 
+                        FontAttributes="Bold" 
+                        HeightRequest="50" 
+                        CornerRadius="10" 
+                        Command="{Binding RegisterCommand}"/>
+
+                <Label Grid.Row="9" FontAttributes="Bold">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Already signed up? " TextColor="{StaticResource Gray400}"/>
+                            <Span Text="Sign in" TextColor="{StaticResource Primary}">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding LoginCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+        </Frame>
+    </Grid>
+    
+</base:ContentPageBase>

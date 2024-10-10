@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<base:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:base="clr-namespace:BethanysPieShop.Mobile.Views.Base"
+                      xmlns:shared="using:BethanysPieShop.Mobile.Views.Shared"
+                      x:Class="BethanysPieShop.Mobile.Views.HomePage">
+    
+     <ScrollView>
+        <Grid>
+            <Grid RowDefinitions="Auto, *">
+                <Image Grid.Row="0"
+                       Source="home.jpg"
+                       Aspect="AspectFill"
+                       HeightRequest="200"
+                       Margin="0,-45,0,0" />
+
+                <Frame Grid.Row="1"
+                       CornerRadius="31"
+                       TranslationY="-23"
+                       BorderColor="Transparent"
+                       BackgroundColor="{StaticResource White}"
+                       VerticalOptions="FillAndExpand">
+                    <Grid RowDefinitions="Auto, Auto, Auto"
+                          Padding="20"
+                          RowSpacing="5">
+                        <Label Grid.Row="0"
+                               Style="{StaticResource Headline}"
+                               FontSize="24"
+                               Text="Pies of the week" />
+                        <Label Grid.Row="1"
+                               Style="{StaticResource SubHeadline}"
+                               FontSize="20"
+                               Text="Enjoy a weekly selection of our favorite pies" />
+                        <CollectionView Grid.Row="2"
+                                        Margin="0"
+                                        ItemsSource="{Binding PiesOfTheWeek}"
+                                        SelectedItem="{Binding SelectedPie, Mode=TwoWay}"
+                                        SelectionChangedCommand="{Binding NavigateToSelectedPieDetailCommand}"
+                                        SelectionMode="Single"
+                                        HeightRequest="260"
+                                        VerticalOptions="Start">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="12"
+                                                   Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <shared:CardView
+                                        CardName="{Binding Name}"
+                                        CardImageUrl="{Binding ImageThumbnailUrl}"
+                                        CardPrice="{Binding Price}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Frame>
+            </Grid>
+            <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}"
+                  IsVisible="{Binding IsLoading}">
+                <ActivityIndicator IsRunning="{Binding IsLoading}" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+    
+</base:ContentPageBase>

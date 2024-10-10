@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<base:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:base="clr-namespace:BethanysPieShop.Mobile.Views.Base"
+                      xmlns:shared="clr-namespace:BethanysPieShop.Mobile.Views.Shared"
+                      x:Class="BethanysPieShop.Mobile.Views.PiesOverviewPage">
+
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding RefreshCommand}">
+        <ScrollView>
+            <Grid>
+                <Grid RowDefinitions="Auto,Auto"
+                  IsVisible="{Binding IsLoaded}">
+                    <Label Grid.Row="0"
+                       Margin="0,10,0,0"
+                       Style="{StaticResource SubHeadline}"
+                       Text="Browse all our delicious pies!" />
+                    <CollectionView Margin="12"
+                                Grid.Row="1"
+                                ItemsSource="{Binding Categories}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="12"
+                                           Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10" RowDefinitions="Auto, Auto">
+                                    <Label Grid.Row="0"
+                                       Text="{Binding Label}"
+                                       Style="{StaticResource Headline}" 
+                                       HorizontalOptions="Start"/>
+
+                                    <CollectionView Margin="0"
+                                                Grid.Row="1"
+                                                ItemsSource="{Binding Pies}"
+                                                SelectedItem="{Binding SelectedPie, Mode=TwoWay}"
+                                                SelectionChangedCommand="{Binding NavigateToSelectedPieDetailCommand}"
+                                                SelectionMode="Single"
+                                                HeightRequest="260"
+                                                VerticalOptions="Start">
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout ItemSpacing="12"
+                                                           Orientation="Horizontal" />
+                                        </CollectionView.ItemsLayout>
+
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <shared:CardView
+                                                CardName="{Binding Name}"
+                                                CardImageUrl="{Binding ImageThumbnailUrl}"
+                                                CardPrice="{Binding Price}" />
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+                <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}"
+                  IsVisible="{Binding IsLoading}">
+                    <ActivityIndicator IsRunning="{Binding IsLoading}" />
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </RefreshView>
+
+</base:ContentPageBase>
