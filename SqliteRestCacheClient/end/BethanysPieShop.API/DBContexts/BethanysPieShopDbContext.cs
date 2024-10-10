@@ -28,7 +28,7 @@ public class BethanysPieShopDbContext : IdentityDbContext<IdentityUser>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        this.Database.Migrate();
+        // this.Database.Migrate(); // todo: run this one time to initialize the DB
         base.OnModelCreating(modelBuilder);
         
         modelBuilder.Entity<Category>().HasData(

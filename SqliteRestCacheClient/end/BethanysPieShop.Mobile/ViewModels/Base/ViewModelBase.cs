@@ -15,6 +15,8 @@ public abstract partial class ViewModelBase : ObservableValidator, IViewModelBas
     [NotifyPropertyChangedFor(nameof(IsLoaded))]
     private bool _isLoading;
 
+    private bool _isLoaded;
+
     public bool IsLoaded => !IsLoading;
 
     [RelayCommand]
@@ -27,9 +29,13 @@ public abstract partial class ViewModelBase : ObservableValidator, IViewModelBas
         InitializeAsyncCommand = new AsyncRelayCommand(
             async () =>
             {
-                IsLoading = true;
-                await Loading(InitializeAsync);
-                IsLoading = false;
+                if(!_isLoaded)
+                {
+                    IsLoading = true;
+                    await Loading(InitializeAsync);
+                    _isLoaded = true;
+                    IsLoading = false;
+                }
             });
     }
 
